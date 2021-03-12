@@ -45,8 +45,7 @@ def evaluate_benchmarks(additional_llcargs):
   log.debug('Found benchmarks: {benchmarks}'.format(benchmarks=benchmarks))
 
   # Compile each machine IR benchmark and evaluate the code size.
-  product = 1.0
-  count = 0
+  total_size = 0
   for benchmark in benchmarks:
     bench_builddir = os.path.join(builddir, benchmark)
 
@@ -98,11 +97,9 @@ def evaluate_benchmarks(additional_llcargs):
       # Subtract the number of bytes in a completely empty object file to
       # improve accuracy of this estimate.
       size = len(res.stdout) - 584
-      product *= size
-      count += 1
+      total_size += size
 
-  geomean = pow(product, 1 / count)
-  return geomean
+  return total_size
 
 
 def main():
