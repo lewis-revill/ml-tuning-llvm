@@ -36,7 +36,7 @@ def mutate_population(population, mutation_probability):
   def mutate_value(value):
     if rng.random() > mutation_probability:
       return value
-    adjustment = rng.integers(low=-(1<<31), high=(1<<31)+1)
+    adjustment = int(rng.triangular(left=-(1<<32), mode=0, right=(1<<32)))
     new_value = value + adjustment
     new_value = min(new_value, (1 << 32) - 1)
     new_value = max(new_value, 0)
@@ -75,7 +75,7 @@ def evaluate_fitness(individual):
 
   # Lower total size is better, so invert and scale this value to obtain a
   # suitable fitness of the individual.
-  return 10000 / total_size
+  return 1000000 / total_size
 
 
 def evaluate_population(population):
@@ -87,7 +87,7 @@ def evaluate_population(population):
   return np.array(fitness_values)
 
 
-def evolve(population, fitness_values, num_elite, num_to_select, mutation_probability=0.05):
+def evolve(population, fitness_values, num_elite, num_to_select, mutation_probability=0.1):
   sorted_indices = fitness_values.argsort()
   sorted_population = population[sorted_indices]
   sorted_fitness_values = fitness_values[sorted_indices]
@@ -119,9 +119,9 @@ def evolve(population, fitness_values, num_elite, num_to_select, mutation_probab
   return new_population
 
 
-NUM_INDIVIDUALS = 64
-NUM_ELITE = 8
-NUM_TO_SELECT = 16
+NUM_INDIVIDUALS = 128
+NUM_ELITE = 16
+NUM_TO_SELECT = 32
 NUM_EPOCHS = 100
 
 def main():
