@@ -138,8 +138,8 @@ def update(particles, scores, velocities, personal_bests, global_best, omega,
 
 
 # Tuneable parameters for the PSO algorithm.
-NUM_PARTICLES = 64
-NUM_ITERATIONS = 100
+NUM_PARTICLES = 256
+NUM_ITERATIONS = 25
 
 def main():
   # Setup logging.

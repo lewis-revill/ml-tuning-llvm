@@ -134,10 +134,10 @@ def evolve(population, fitness_values, num_elite, num_to_select,
 
 
 # Tuneable parameters for the genetic algorithm.
-NUM_INDIVIDUALS = 64
-NUM_ELITE = 8
-NUM_TO_SELECT = 4
-NUM_EPOCHS = 100
+NUM_INDIVIDUALS = 256
+NUM_ELITE = 32
+NUM_TO_SELECT = 16
+NUM_EPOCHS = 25
 
 def main():
   # Setup logging.
